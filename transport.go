@@ -30,7 +30,7 @@ func MakeHTTPHandler(ctx context.Context, e Endpoints, imagePath string, logger 
 	}
 
 	// GET /catalogue       List
-	// GET /catalogue/groesse  Count
+	// GET /catalogue/size  Count
 	// GET /catalogue/{id}  Get
 	// GET /tags            Tags
 	// GET /health		Health Check
@@ -45,7 +45,7 @@ func MakeHTTPHandler(ctx context.Context, e Endpoints, imagePath string, logger 
 		encodeListResponse,
 		append(options, httptransport.ServerBefore(opentracing.FromHTTPRequest(tracer, "GET /catalogue", logger)))...,
 	))
-	r.Methods("GET").Path("/catalogue/groesse").Handler(httptransport.NewServer(
+	r.Methods("GET").Path("/catalogue/size").Handler(httptransport.NewServer(
 		ctx,
 		circuitbreaker.Gobreaker(gobreaker.NewCircuitBreaker(gobreaker.Settings{
 			Name:    "Count",
@@ -53,7 +53,7 @@ func MakeHTTPHandler(ctx context.Context, e Endpoints, imagePath string, logger 
 		}))(e.CountEndpoint),
 		decodeCountRequest,
 		encodeResponse,
-		append(options, httptransport.ServerBefore(opentracing.FromHTTPRequest(tracer, "GET /catalogue/groesse", logger)))...,
+		append(options, httptransport.ServerBefore(opentracing.FromHTTPRequest(tracer, "GET /catalogue/size", logger)))...,
 	))
 	r.Methods("GET").Path("/catalogue/{id}").Handler(httptransport.NewServer(
 		ctx,

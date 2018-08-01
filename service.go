@@ -16,7 +16,7 @@ import (
 // catalogue of sock products.
 type Service interface {
 	List(tags []string, order string, pageNum, pageSize int) ([]Sock, error) // GET /catalogue
-	Count(tags []string) (int, error)                                        // GET /catalogue/groesse
+	Count(tags []string) (int, error)                                        // GET /catalogue/size
 	Get(id string) (Sock, error)                                             // GET /catalogue/{id}
 	Tags() ([]string, error)                                                 // GET /tags
 	Health() []Health                                                        // GET /health
