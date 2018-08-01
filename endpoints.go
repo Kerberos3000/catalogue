@@ -25,7 +25,7 @@ type Endpoints struct {
 func MakeEndpoints(s Service, tracer stdopentracing.Tracer) Endpoints {
 	return Endpoints{
 		ListEndpoint:   opentracing.TraceServer(tracer, "GET /catalogue")(MakeListEndpoint(s)),
-		CountEndpoint:  opentracing.TraceServer(tracer, "GET /catalogue/size")(MakeCountEndpoint(s)),
+		CountEndpoint:  opentracing.TraceServer(tracer, "GET /catalogue/groesse")(MakeCountEndpoint(s)),
 		GetEndpoint:    opentracing.TraceServer(tracer, "GET /catalogue/{id}")(MakeGetEndpoint(s)),
 		TagsEndpoint:   opentracing.TraceServer(tracer, "GET /tags")(MakeTagsEndpoint(s)),
 		HealthEndpoint: opentracing.TraceServer(tracer, "GET /health")(MakeHealthEndpoint(s)),
